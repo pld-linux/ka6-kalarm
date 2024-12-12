@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	24.08.3
+%define		kdeappsver	24.12.0
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		kalarm
 Summary:	kalarm
 Name:		ka6-%{kaname}
-Version:	24.08.3
+Version:	24.12.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	beeb033f8e9e62fe5010e268cdf1cd7e
+# Source0-md5:	1c0aa932bbc0f07dd5115fc3dadbddff
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.20
@@ -36,8 +36,8 @@ BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-ExcludeArch:	x32 i686
 Obsoletes:	ka5-%{kaname} < %{version}
+ExcludeArch:	x32 i686
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -124,3 +124,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/polkit-1/actions/org.kde.kalarm.rtcwake.policy
 %{_datadir}/qlogging-categories6/kalarm.categories
 %{_datadir}/qlogging-categories6/kalarm.renamecategories
+%attr(755,root,root) %{_libdir}/kconf_update_bin/kalarm-3.10.0-run_mode
+%{_datadir}/kconf_update/kalarm.upd
