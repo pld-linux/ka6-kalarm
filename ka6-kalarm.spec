@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	24.12.3
+%define		kdeappsver	25.04.0
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		kalarm
 Summary:	kalarm
 Name:		ka6-%{kaname}
-Version:	24.12.3
+Version:	25.04.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	02abe943117426887013b6be659f5a7c
+# Source0-md5:	f81d037d3cafb75855ce2b1e4cda69f8
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.20
@@ -30,11 +30,13 @@ BuildRequires:	kf6-kdbusaddons-devel >= %{kframever}
 BuildRequires:	kf6-kholidays-devel >= %{kframever}
 BuildRequires:	kf6-kiconthemes-devel >= %{kframever}
 BuildRequires:	kf6-kjobwidgets-devel >= %{kframever}
+BuildRequires:	mpv-client-devel
 BuildRequires:	ninja
 BuildRequires:	qt6-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	vlc-devel
 BuildRequires:	xz
 Obsoletes:	ka5-%{kaname} < %{version}
 ExcludeArch:	x32 i686
@@ -106,6 +108,8 @@ rm -rf $RPM_BUILD_ROOT
 %ghost %{_libdir}/libkalarmplugin.so.6
 %dir %{_libdir}/qt6/plugins/pim6/kalarm
 %attr(755,root,root) %{_libdir}/qt6/plugins/pim6/kalarm/akonadiplugin.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/pim6/kalarm/audioplugin_mpv.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/pim6/kalarm/audioplugin_vlc.so
 %attr(755,root,root) %{_prefix}/libexec/kf6/kauth/kalarm_helper
 %{_desktopdir}/org.kde.kalarm.desktop
 %{_datadir}/config.kcfg/kalarmconfig.kcfg
