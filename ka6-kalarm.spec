@@ -8,7 +8,7 @@
 Summary:	kalarm
 Name:		ka6-%{kaname}
 Version:	25.04.3
-Release:	2
+Release:	3
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
@@ -30,6 +30,7 @@ BuildRequires:	kf6-kdbusaddons-devel >= %{kframever}
 BuildRequires:	kf6-kholidays-devel >= %{kframever}
 BuildRequires:	kf6-kiconthemes-devel >= %{kframever}
 BuildRequires:	kf6-kjobwidgets-devel >= %{kframever}
+BuildRequires:	kf6-knotifyconfig-devel >= %{kframever}
 BuildRequires:	mpv-client-devel
 BuildRequires:	ninja
 BuildRequires:	qt6-build >= %{qtver}
