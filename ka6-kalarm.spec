@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	25.08.2
+%define		kdeappsver	25.08.3
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		kalarm
 Summary:	kalarm
 Name:		ka6-%{kaname}
-Version:	25.08.2
-Release:	2
+Version:	25.08.3
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	70a1be7c5869383b72ec7c276ada505b
+# Source0-md5:	2e186f764b47d35dca01f0353aa01747
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.20
@@ -110,14 +110,14 @@ rm -rf $RPM_BUILD_ROOT
 /etc/xdg/autostart/kalarm.autostart.desktop
 %attr(755,root,root) %{_bindir}/kalarm
 %attr(755,root,root) %{_bindir}/kalarmautostart
-%attr(755,root,root) %{_libdir}/libkalarmcalendar.so.*.*
+%{_libdir}/libkalarmcalendar.so.*.*
 %ghost %{_libdir}/libkalarmcalendar.so.6
-%attr(755,root,root) %{_libdir}/libkalarmplugin.so.*.*
+%{_libdir}/libkalarmplugin.so.*.*
 %ghost %{_libdir}/libkalarmplugin.so.6
 %dir %{_libdir}/qt6/plugins/pim6/kalarm
-%attr(755,root,root) %{_libdir}/qt6/plugins/pim6/kalarm/akonadiplugin.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/pim6/kalarm/audioplugin_mpv.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/pim6/kalarm/audioplugin_vlc.so
+%{_libdir}/qt6/plugins/pim6/kalarm/akonadiplugin.so
+%{_libdir}/qt6/plugins/pim6/kalarm/audioplugin_mpv.so
+%{_libdir}/qt6/plugins/pim6/kalarm/audioplugin_vlc.so
 %attr(755,root,root) %{_prefix}/libexec/kf6/kauth/kalarm_helper
 %{_desktopdir}/org.kde.kalarm.desktop
 %{_datadir}/config.kcfg/kalarmconfig.kcfg
