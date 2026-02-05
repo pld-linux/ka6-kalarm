@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	25.12.1
+%define		kdeappsver	25.12.2
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		kalarm
 Summary:	kalarm
 Name:		ka6-%{kaname}
-Version:	25.12.1
-Release:	2
+Version:	25.12.2
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	04e0b89fe0f04cdf0114af046b843af1
+# Source0-md5:	64b578dd1fcb8ef8af325717c42c994c
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.20
@@ -39,7 +39,7 @@ BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	vlc-devel
 BuildRequires:	xz
-Requires(post,postun):	desktop-file-utils
+Requires:	%{name}-data = %{version}-%{release}
 %requires_eq_to Qt6Core Qt6Core-devel
 Obsoletes:	ka5-%{kaname} < %{version}
 ExcludeArch:	x32 i686
@@ -71,6 +71,19 @@ się zalogujesz • Możliwość konfiguracji koloru i rodzaju czcionki •
 Wsparcie dla wielu kalendarzy powiadomień, co pozwala na przykład
 współdzielić alarmy między laptopem a komputerem stacjonarnym
 
+%package data
+Summary:	Data files for %{kaname}
+Summary(pl.UTF-8):	Dane dla %{kaname}
+Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
+BuildArch:	noarch
+
+%description data
+Data files for %{kaname}.
+
+%description data -l pl.UTF-8
+Dane dla %{kaname}.
+
 %prep
 %setup -q -n %{kaname}-%{version}
 
@@ -99,13 +112,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
+
+%post data
 %update_desktop_database_post
 
 %postun
 /sbin/ldconfig
+
+%postun data
 %update_desktop_database_postun
 
-%files -f %{kaname}.lang
+%files
 %defattr(644,root,root,755)
 /etc/xdg/autostart/kalarm.autostart.desktop
 %attr(755,root,root) %{_bindir}/kalarm
@@ -119,6 +136,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/plugins/pim6/kalarm/audioplugin_mpv.so
 %{_libdir}/qt6/plugins/pim6/kalarm/audioplugin_vlc.so
 %attr(755,root,root) %{_prefix}/libexec/kf6/kauth/kalarm_helper
+%attr(755,root,root) %{_libdir}/kconf_update_bin/kalarm-3.10.0-run_mode
+
+%files data -f %{kaname}.lang
+%defattr(644,root,root,755)
 %{_desktopdir}/org.kde.kalarm.desktop
 %{_datadir}/config.kcfg/kalarmconfig.kcfg
 %{_datadir}/dbus-1/interfaces/org.kde.kalarm.kalarm.xml
@@ -132,5 +153,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/polkit-1/actions/org.kde.kalarm.rtcwake.policy
 %{_datadir}/qlogging-categories6/kalarm.categories
 %{_datadir}/qlogging-categories6/kalarm.renamecategories
-%attr(755,root,root) %{_libdir}/kconf_update_bin/kalarm-3.10.0-run_mode
 %{_datadir}/kconf_update/kalarm.upd
